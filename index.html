@@ -15,6 +15,7 @@
       --accent-dark: #b8e13f;
       --soft-orange: #f0b579;
       --soft-peach: #ffe2c7;
+      --soft-beige: #f7f2eb;
       --radius: 22px;
       --shadow: 0 10px 30px rgba(0,0,0,0.06);
       --max: 1160px;
@@ -50,10 +51,6 @@
       padding: 88px 0;
     }
 
-    .section-tight {
-      padding: 56px 0;
-    }
-
     .center {
       text-align: center;
     }
@@ -86,19 +83,10 @@
       letter-spacing: -0.02em;
     }
 
-    h3 {
-      font-size: 28px;
-      font-weight: 700;
-    }
-
     .sub {
-      max-width: 760px;
+      max-width: 820px;
       margin: 0 auto;
       font-size: clamp(18px, 2.4vw, 24px);
-      color: var(--muted);
-    }
-
-    .muted {
       color: var(--muted);
     }
 
@@ -117,10 +105,27 @@
 
     .highlight {
       display: inline-block;
-      padding: 10px 18px;
+      padding: 12px 22px;
       background: var(--soft-orange);
       border-radius: 999px;
-      margin-top: 10px;
+      margin-top: 12px;
+    }
+
+    .hero-tags {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-tag {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
 
     .price-row {
@@ -141,6 +146,12 @@
     .new-price {
       font-size: 42px;
       font-weight: 800;
+    }
+
+    .price-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 16px;
     }
 
     .btn {
@@ -215,10 +226,22 @@
     }
 
     .pain-card {
-      min-height: 126px;
+      min-height: 150px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      text-align: left;
+    }
+
+    .pain-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .pain-text {
+      color: var(--muted);
+      font-size: 17px;
     }
 
     .pain-icon,
@@ -259,18 +282,14 @@
       min-height: 260px;
     }
 
-    .image-placeholder {
+    .product-image {
       width: 100%;
       height: 200px;
+      object-fit: contain;
+      background: #f7f7f7;
       border-radius: 20px;
-      background: linear-gradient(135deg, #f3c38f, #f7dfc2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #8f5a26;
-      font-weight: 700;
-      text-align: center;
-      padding: 20px;
+      display: block;
+      padding: 10px;
     }
 
     .product-title {
@@ -319,6 +338,12 @@
     .faq-grid {
       grid-template-columns: repeat(2, 1fr);
       margin-top: 34px;
+    }
+
+    .result-card,
+    .faq-card,
+    .review-card {
+      text-align: left;
     }
 
     .review-quote {
@@ -416,6 +441,10 @@
       .new-price {
         font-size: 34px;
       }
+
+      .hero-tags {
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
@@ -427,18 +456,29 @@
     <section class="hero">
       <div class="hero-box">
         <div class="eyebrow">⚡ Готова система у Google Sheets</div>
+
         <h1>
-          Наведи порядок у фінансах, задачах і житті
-          <span class="highlight">в одній системі</span>
+          Перестань жити
+          <span class="highlight">в хаосі</span>
         </h1>
+
         <p class="sub">
-          6 готових Google Sheets планерів, які дають ясність, контроль і структуру кожен день
+          6 готових планерів, які допоможуть навести порядок у фінансах, задачах, звичках і щоденному житті — без складних налаштувань і зайвого шуму
         </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">💰 Контроль грошей</span>
+          <span class="hero-tag">✅ Задачі під контролем</span>
+          <span class="hero-tag">🔁 Дисципліна і звички</span>
+          <span class="hero-tag">📅 Структура дня і тижня</span>
+        </div>
 
         <div class="price-row">
           <span class="old-price">1794 грн</span>
           <span class="new-price">999 грн за весь набір</span>
         </div>
+
+        <p class="price-note">Разова покупка · Доступ одразу після оплати</p>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Отримати всі планери</a>
@@ -450,23 +490,38 @@
     <!-- 2 экран -->
     <section class="section center">
       <div class="eyebrow">🧠 Знайомо?</div>
-      <h2>Ти постійно щось плануєш, але по факту</h2>
+      <h2>Ось чому ти буксуєш</h2>
       <div class="pain-grid">
         <div class="pain-card">
-          <div class="pain-icon">💸</div>
-          <div>Гроші зникають і ти не розумієш куди</div>
+          <div>
+            <div class="pain-icon">⏳</div>
+            <div class="pain-title">Постійно відкладаєш задачі</div>
+            <div class="pain-text">Список росте, але по факту важливе не закривається.</div>
+          </div>
         </div>
+
         <div class="pain-card">
-          <div class="pain-icon">📌</div>
-          <div>Задачі накопичуються і висять у голові</div>
+          <div>
+            <div class="pain-icon">💸</div>
+            <div class="pain-title">Не розумієш, куди йдуть гроші</div>
+            <div class="pain-text">Витрати є, а ясності немає. І це постійно фонить у голові.</div>
+          </div>
         </div>
+
         <div class="pain-card">
-          <div class="pain-icon">🧩</div>
-          <div>Немає системи, яка тримає все разом</div>
+          <div>
+            <div class="pain-icon">🌀</div>
+            <div class="pain-title">Починаєш, але швидко зриваєшся</div>
+            <div class="pain-text">Без системи все тримається на настрої, а не на структурі.</div>
+          </div>
         </div>
+
         <div class="pain-card">
-          <div class="pain-icon">🌀</div>
-          <div>Все тримається в голові — і це виснажує</div>
+          <div>
+            <div class="pain-icon">🧩</div>
+            <div class="pain-title">В голові шум, а не порядок</div>
+            <div class="pain-text">Коли все розкидано, важко відчути контроль над життям.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -477,8 +532,8 @@
         <div class="eyebrow">🔥 Перелом</div>
         <h2>Проблема не в тобі</h2>
         <p>
-          Проблема в тому, що у тебе немає системи. Я зібрав набір планерів, який закриває всі ключові сфери життя
-          й допомагає перейти від хаосу до контролю.
+          Проблема в тому, що у тебе немає системи. Mindseta — це набір планерів, який закриває ключові сфери життя
+          і допомагає перейти від хаосу до ясності, контролю й дії.
         </p>
       </div>
     </section>
@@ -493,11 +548,11 @@
       <div class="inside-grid">
 
         <article class="inside-card">
-          <div class="image-placeholder">Сюди вставиш скрин Планера життя</div>
+          <img class="product-image" src="./images/planner-life.png" alt="Планер життя">
           <div>
             <div class="inside-icon">📊</div>
             <div class="product-title">Планер життя</div>
-            <div class="product-text">Контроль всього: фінанси, задачі, звички</div>
+            <div class="product-text">Контроль всього: фінанси, задачі, звички.</div>
             <div class="product-actions">
               <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
               <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
@@ -506,11 +561,11 @@
         </article>
 
         <article class="inside-card">
-          <div class="image-placeholder">Сюди вставиш скрин Планера тижня</div>
+          <img class="product-image" src="./images/planner-week.png" alt="Планер тижня">
           <div>
             <div class="inside-icon">📅</div>
             <div class="product-title">Планер тижня</div>
-            <div class="product-text">Чітка структура кожного дня</div>
+            <div class="product-text">Чітка структура кожного дня і тижня.</div>
             <div class="product-actions">
               <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
               <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
@@ -519,11 +574,11 @@
         </article>
 
         <article class="inside-card">
-          <div class="image-placeholder">Сюди вставиш скрин Трекера звичок</div>
+          <img class="product-image" src="./images/habit-tracker.png" alt="Трекер звичок">
           <div>
             <div class="inside-icon">🔁</div>
             <div class="product-title">Трекер звичок</div>
-            <div class="product-text">Дисципліна без хаосу</div>
+            <div class="product-text">Дисципліна без хаосу і втоми від ручного контролю.</div>
             <div class="product-actions">
               <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
               <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
@@ -532,11 +587,11 @@
         </article>
 
         <article class="inside-card">
-          <div class="image-placeholder">Сюди вставиш скрин Річного планера + бюджету</div>
+          <img class="product-image" src="./images/budget-year.png" alt="Річний планер + бюджет">
           <div>
             <div class="inside-icon">💰</div>
             <div class="product-title">Річний планер + бюджет</div>
-            <div class="product-text">Повний контроль грошей</div>
+            <div class="product-text">Повний контроль грошей на дистанції.</div>
             <div class="product-actions">
               <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
               <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
@@ -545,11 +600,11 @@
         </article>
 
         <article class="inside-card">
-          <div class="image-placeholder">Сюди вставиш скрин Трекера задач</div>
+          <img class="product-image" src="./images/task-tracker.png" alt="Трекер задач">
           <div>
             <div class="inside-icon">✅</div>
             <div class="product-title">Трекер задач</div>
-            <div class="product-text">Більше нічого не губиться</div>
+            <div class="product-text">Більше нічого не губиться і не зависає в голові.</div>
             <div class="product-actions">
               <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
               <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
@@ -558,11 +613,11 @@
         </article>
 
         <article class="inside-card">
-          <div class="image-placeholder">Сюди вставиш скрин Планера продуктивності</div>
+          <img class="product-image" src="./images/productivity-planner.png" alt="Планер продуктивності">
           <div>
             <div class="inside-icon">⚡</div>
             <div class="product-title">Планер продуктивності</div>
-            <div class="product-text">Контроль енергії і фокусу</div>
+            <div class="product-text">Контроль енергії, фокусу й продуктивного ритму.</div>
             <div class="product-actions">
               <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
               <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
@@ -590,19 +645,19 @@
       <div class="result-grid">
         <div class="result-card">
           <div class="result-icon">💵</div>
-          <div>Ти почнеш бачити свої гроші</div>
+          <div>Ти почнеш бачити свої гроші й керувати ними усвідомлено.</div>
         </div>
         <div class="result-card">
           <div class="result-icon">🗂️</div>
-          <div>З’явиться контроль над задачами</div>
+          <div>З’явиться контроль над задачами і щоденною структурою.</div>
         </div>
         <div class="result-card">
           <div class="result-icon">🌿</div>
-          <div>Перестанеш жити в хаосі</div>
+          <div>Перестанеш жити в хаосі та постійній внутрішній метушні.</div>
         </div>
         <div class="result-card">
           <div class="result-icon">🧠</div>
-          <div>З’явиться відчуття ясності</div>
+          <div>З’явиться відчуття ясності, опори й зібраності.</div>
         </div>
       </div>
     </section>
@@ -668,7 +723,7 @@
       <div class="final-box">
         <div class="eyebrow">🚀 Фінальний крок</div>
         <h2>Це не просто таблиці</h2>
-        <p>Це система, яка дає контроль над життям, грошима, задачами та щоденною структурою.</p>
+        <p>Це твоя особиста система контролю над грошима, задачами і життям. Один набір, який прибирає хаос і повертає ясність.</p>
         <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Отримати за 999 грн</a>
         <div class="small-note">Разова покупка · Доступ одразу після оплати · Працює на телефоні і ПК</div>
       </div>
