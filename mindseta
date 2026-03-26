@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindseta</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f5f5;
+    color: #222;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #666;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: #c9f04b;
+    border-radius: 12px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.section {
+    margin-top: 100px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.price {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.old {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.big {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="hero">
+    <h1>Mindseta</h1>
+    <p>Система планерів у Google Sheets для контролю життя, фінансів і задач</p>
+    <a href="#" class="button">Отримати всі планери — 999 грн</a>
+</div>
+
+<div class="section">
+    <h2 style="text-align:center;">Знайомо?</h2>
+
+    <div class="cards">
+        <div class="card">Хаос у задачах</div>
+        <div class="card">Гроші зникають</div>
+        <div class="card">Немає системи</div>
+        <div class="card">Все в голові</div>
+    </div>
+</div>
+
+<div class="section">
+    <h2 style="text-align:center;">Що входить</h2>
+
+    <div class="cards">
+        <div class="card">Планер життя</div>
+        <div class="card">Планер тижня</div>
+        <div class="card">Трекер звичок</div>
+        <div class="card">Бюджет</div>
+        <div class="card">Трекер задач</div>
+        <div class="card">Планер продуктивності</div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="price">
+        <p class="old">1794 грн</p>
+        <p class="big">999 грн</p>
+        <p>за всі 6 планерів</p>
+        <a href="#" class="button">Купити зараз</a>
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>
