@@ -276,30 +276,20 @@
 
     .inside-card {
       display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 28px;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
       align-items: center;
-      min-height: 320px;
-    }
-
-    .product-image-wrap {
-      width: 100%;
-      height: 280px;
-      border-radius: 24px;
-      background: #ffffff;
-      border: 1px solid #ececec;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      overflow: hidden;
+      min-height: 260px;
     }
 
     .product-image {
       width: 100%;
-      height: 100%;
+      height: 200px;
       object-fit: contain;
+      background: #f7f7f7;
+      border-radius: 20px;
       display: block;
+      padding: 10px;
     }
 
     .product-title {
@@ -425,10 +415,6 @@
       .inside-card {
         grid-template-columns: 1fr;
       }
-
-      .product-image-wrap {
-        height: 320px;
-      }
     }
 
     @media (max-width: 640px) {
@@ -458,10 +444,6 @@
 
       .hero-tags {
         justify-content: flex-start;
-      }
-
-      .product-image-wrap {
-        height: 260px;
       }
     }
   </style>
@@ -557,94 +539,94 @@
     </section>
 
     <!-- 4 экран -->
-   <section class="section" id="inside">
-  <div class="center">
-    <div class="eyebrow">📦 Що входить</div>
-    <h2>6 планерів, які працюють як одна система</h2>
-  </div>
-
-  <div class="inside-grid">
-
-    <article class="inside-card">
-      <img class="product-image" src="./images/planner-life.png" alt="Планер життя">
-      <div>
-        <div class="inside-icon">📊</div>
-        <div class="product-title">Планер життя</div>
-        <div class="product-text">Контроль всього: фінанси, задачі, звички.</div>
-        <div class="product-actions">
-          <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
-          <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
-        </div>
+    <section class="section" id="inside">
+      <div class="center">
+        <div class="eyebrow">📦 Що входить</div>
+        <h2>6 планерів, які працюють як одна система</h2>
       </div>
-    </article>
 
-    <article class="inside-card">
-      <img class="product-image" src="./images/planner-week.png" alt="Планер тижня">
-      <div>
-        <div class="inside-icon">📅</div>
-        <div class="product-title">Планер тижня</div>
-        <div class="product-text">Чітка структура кожного дня і тижня.</div>
-        <div class="product-actions">
-          <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
-          <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
-        </div>
+      <div class="inside-grid">
+
+        <article class="inside-card">
+          <img class="product-image" src="./images/planner-life.png" alt="Планер життя">
+          <div>
+            <div class="inside-icon">📊</div>
+            <div class="product-title">Планер життя</div>
+            <div class="product-text">Контроль всього: фінанси, задачі, звички.</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <img class="product-image" src="./images/planner-week.png" alt="Планер тижня">
+          <div>
+            <div class="inside-icon">📅</div>
+            <div class="product-title">Планер тижня</div>
+            <div class="product-text">Чітка структура кожного дня і тижня.</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <img class="product-image" src="./images/habit-tracker.png" alt="Трекер звичок">
+          <div>
+            <div class="inside-icon">🔁</div>
+            <div class="product-title">Трекер звичок</div>
+            <div class="product-text">Дисципліна без хаосу і втоми від ручного контролю.</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <img class="product-image" src="./images/budget-year.png" alt="Річний планер + бюджет">
+          <div>
+            <div class="inside-icon">💰</div>
+            <div class="product-title">Річний планер + бюджет</div>
+            <div class="product-text">Повний контроль грошей на дистанції.</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <img class="product-image" src="./images/task-tracker.png" alt="Трекер задач">
+          <div>
+            <div class="inside-icon">✅</div>
+            <div class="product-title">Трекер задач</div>
+            <div class="product-text">Більше нічого не губиться і не зависає в голові.</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <img class="product-image" src="./images/productivity-planner.png" alt="Планер продуктивності">
+          <div>
+            <div class="inside-icon">⚡</div>
+            <div class="product-title">Планер продуктивності</div>
+            <div class="product-text">Контроль енергії, фокусу й продуктивного ритму.</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
       </div>
-    </article>
-
-    <article class="inside-card">
-      <img class="product-image" src="./images/habit-tracker.png" alt="Трекер звичок">
-      <div>
-        <div class="inside-icon">🔁</div>
-        <div class="product-title">Трекер звичок</div>
-        <div class="product-text">Дисципліна без хаосу і втоми від ручного контролю.</div>
-        <div class="product-actions">
-          <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
-          <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="inside-card">
-      <img class="product-image" src="./images/budget-year.png" alt="Річний планер + бюджет">
-      <div>
-        <div class="inside-icon">💰</div>
-        <div class="product-title">Річний планер + бюджет</div>
-        <div class="product-text">Повний контроль грошей на дистанції.</div>
-        <div class="product-actions">
-          <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
-          <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="inside-card">
-      <img class="product-image" src="./images/task-tracker.png" alt="Трекер задач">
-      <div>
-        <div class="inside-icon">✅</div>
-        <div class="product-title">Трекер задач</div>
-        <div class="product-text">Більше нічого не губиться і не зависає в голові.</div>
-        <div class="product-actions">
-          <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
-          <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="inside-card">
-      <img class="product-image" src="./images/productivity-planner.png" alt="Планер продуктивності">
-      <div>
-        <div class="inside-icon">⚡</div>
-        <div class="product-title">Планер продуктивності</div>
-        <div class="product-text">Контроль енергії, фокусу й продуктивного ритму.</div>
-        <div class="product-actions">
-          <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
-          <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
-        </div>
-      </div>
-    </article>
-
-  </div>
-</section>
+    </section>
 
     <!-- 5 экран -->
     <section class="section">
