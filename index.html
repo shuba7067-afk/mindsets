@@ -1,129 +1,684 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mindseta</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mindseta — система планерів у Google Sheets</title>
+  <style>
+    :root {
+      --bg: #f3f3f3;
+      --card: #ffffff;
+      --text: #222222;
+      --muted: #666666;
+      --line: #e7e7e7;
+      --accent: #c9f04b;
+      --accent-dark: #b8e13f;
+      --soft-orange: #f0b579;
+      --soft-peach: #ffe2c7;
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.06);
+      --max: 1160px;
+    }
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f5f5f5;
-    color: #222;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 40px 20px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.hero {
-    text-align: center;
-    padding: 100px 20px;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
 
-.hero h1 {
-    font-size: 48px;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.hero p {
-    font-size: 18px;
-    color: #666;
-}
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-.button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 15px 30px;
-    background: #c9f04b;
-    border-radius: 12px;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-}
+    .section {
+      padding: 88px 0;
+    }
 
-.section {
-    margin-top: 100px;
-}
+    .section-tight {
+      padding: 56px 0;
+    }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
+    .center {
+      text-align: center;
+    }
 
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 16px;
-}
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--soft-peach);
+      color: #8a4e1f;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
 
-.price {
-    text-align: center;
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-}
+    h1, h2, h3 {
+      margin: 0 0 16px;
+      line-height: 1.05;
+    }
 
-.old {
-    text-decoration: line-through;
-    color: gray;
-}
+    h1 {
+      font-size: clamp(42px, 8vw, 84px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
 
-.big {
-    font-size: 40px;
-    font-weight: bold;
-}
+    h2 {
+      font-size: clamp(30px, 4vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
 
-</style>
+    h3 {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .sub {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: clamp(18px, 2.4vw, 24px);
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 80px 0 48px;
+    }
+
+    .hero-box {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+      border: 1px solid #ececec;
+      border-radius: 32px;
+      padding: 72px 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .highlight {
+      display: inline-block;
+      padding: 10px 18px;
+      background: var(--soft-orange);
+      border-radius: 999px;
+      margin-top: 10px;
+    }
+
+    .price-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .old-price {
+      color: #8a8a8a;
+      text-decoration: line-through;
+      font-size: 22px;
+    }
+
+    .new-price {
+      font-size: 42px;
+      font-weight: 800;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 58px;
+      padding: 0 28px;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 18px;
+      transition: .2s ease;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: #222;
+      border: 1px solid #ddd;
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: #fafafa;
+    }
+
+    .hero-actions {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .pain-grid,
+    .result-grid,
+    .faq-grid,
+    .review-grid,
+    .inside-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .pain-grid {
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 34px;
+    }
+
+    .pain-card,
+    .result-card,
+    .faq-card,
+    .review-card,
+    .inside-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid #ececec;
+    }
+
+    .pain-card {
+      min-height: 126px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pain-icon,
+    .inside-icon,
+    .faq-icon,
+    .result-icon,
+    .review-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .break-card {
+      background: linear-gradient(180deg, #fff 0%, #f8f8f8 100%);
+      border-radius: 32px;
+      padding: 48px 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid #ececec;
+      text-align: center;
+    }
+
+    .break-card p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 22px;
+      color: var(--muted);
+    }
+
+    .inside-grid {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 36px;
+    }
+
+    .inside-card {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      align-items: center;
+      min-height: 260px;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 200px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f3c38f, #f7dfc2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8f5a26;
+      font-weight: 700;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .product-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .product-text {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 42px 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+      border-radius: 28px;
+      border: 1px solid #ececec;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .math-line {
+      font-size: 22px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .accent-line {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .result-grid,
+    .review-grid,
+    .faq-grid {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 34px;
+    }
+
+    .review-quote {
+      font-size: 20px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .review-name {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .faq-q {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .faq-a {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .final-box {
+      background: #161616;
+      color: #fff;
+      border-radius: 32px;
+      padding: 56px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .final-box p {
+      color: rgba(255,255,255,0.72);
+      font-size: 20px;
+      max-width: 760px;
+      margin: 0 auto 24px;
+    }
+
+    .final-box .btn-secondary {
+      background: #fff;
+      color: #111;
+      border: none;
+    }
+
+    .small-note {
+      margin-top: 16px;
+      color: rgba(255,255,255,0.62);
+      font-size: 14px;
+    }
+
+    .footer {
+      padding: 30px 0 50px;
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .pain-grid,
+      .inside-grid,
+      .result-grid,
+      .review-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .inside-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 68px 0;
+      }
+
+      .hero-box,
+      .break-card,
+      .price-box,
+      .final-box {
+        padding: 38px 18px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions,
+      .product-actions {
+        flex-direction: column;
+      }
+
+      .new-price {
+        font-size: 34px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <main class="container">
 
-<div class="hero">
-    <h1>Mindseta</h1>
-    <p>Система планерів у Google Sheets для контролю життя, фінансів і задач</p>
-    <a href="#" class="button">Отримати всі планери — 999 грн</a>
-</div>
+    <!-- 1 экран -->
+    <section class="hero">
+      <div class="hero-box">
+        <div class="eyebrow">⚡ Готова система у Google Sheets</div>
+        <h1>
+          Наведи порядок у фінансах, задачах і житті
+          <span class="highlight">в одній системі</span>
+        </h1>
+        <p class="sub">
+          6 готових Google Sheets планерів, які дають ясність, контроль і структуру кожен день
+        </p>
 
-<div class="section">
-    <h2 style="text-align:center;">Знайомо?</h2>
+        <div class="price-row">
+          <span class="old-price">1794 грн</span>
+          <span class="new-price">999 грн за весь набір</span>
+        </div>
 
-    <div class="cards">
-        <div class="card">Хаос у задачах</div>
-        <div class="card">Гроші зникають</div>
-        <div class="card">Немає системи</div>
-        <div class="card">Все в голові</div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Отримати всі планери</a>
+          <a class="btn btn-secondary" href="#inside">Подивитися, що входить</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 экран -->
+    <section class="section center">
+      <div class="eyebrow">🧠 Знайомо?</div>
+      <h2>Ти постійно щось плануєш, але по факту</h2>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon">💸</div>
+          <div>Гроші зникають і ти не розумієш куди</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">📌</div>
+          <div>Задачі накопичуються і висять у голові</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🧩</div>
+          <div>Немає системи, яка тримає все разом</div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🌀</div>
+          <div>Все тримається в голові — і це виснажує</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 экран -->
+    <section class="section">
+      <div class="break-card">
+        <div class="eyebrow">🔥 Перелом</div>
+        <h2>Проблема не в тобі</h2>
+        <p>
+          Проблема в тому, що у тебе немає системи. Я зібрав набір планерів, який закриває всі ключові сфери життя
+          й допомагає перейти від хаосу до контролю.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 экран -->
+    <section class="section" id="inside">
+      <div class="center">
+        <div class="eyebrow">📦 Що входить</div>
+        <h2>6 планерів, які працюють як одна система</h2>
+      </div>
+
+      <div class="inside-grid">
+
+        <article class="inside-card">
+          <div class="image-placeholder">Сюди вставиш скрин Планера життя</div>
+          <div>
+            <div class="inside-icon">📊</div>
+            <div class="product-title">Планер життя</div>
+            <div class="product-text">Контроль всього: фінанси, задачі, звички</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <div class="image-placeholder">Сюди вставиш скрин Планера тижня</div>
+          <div>
+            <div class="inside-icon">📅</div>
+            <div class="product-title">Планер тижня</div>
+            <div class="product-text">Чітка структура кожного дня</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <div class="image-placeholder">Сюди вставиш скрин Трекера звичок</div>
+          <div>
+            <div class="inside-icon">🔁</div>
+            <div class="product-title">Трекер звичок</div>
+            <div class="product-text">Дисципліна без хаосу</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <div class="image-placeholder">Сюди вставиш скрин Річного планера + бюджету</div>
+          <div>
+            <div class="inside-icon">💰</div>
+            <div class="product-title">Річний планер + бюджет</div>
+            <div class="product-text">Повний контроль грошей</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <div class="image-placeholder">Сюди вставиш скрин Трекера задач</div>
+          <div>
+            <div class="inside-icon">✅</div>
+            <div class="product-title">Трекер задач</div>
+            <div class="product-text">Більше нічого не губиться</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="inside-card">
+          <div class="image-placeholder">Сюди вставиш скрин Планера продуктивності</div>
+          <div>
+            <div class="inside-icon">⚡</div>
+            <div class="product-title">Планер продуктивності</div>
+            <div class="product-text">Контроль енергії і фокусу</div>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Входить до набору — 999 грн</a>
+              <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Купити окремо — 299 грн</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 5 экран -->
+    <section class="section">
+      <div class="price-box">
+        <div class="eyebrow">💥 Найвигідніший варіант</div>
+        <div class="math-line">Якщо купувати окремо: 299 × 6 = 1794 грн</div>
+        <div class="accent-line">Зараз весь набір — 999 грн</div>
+        <a class="btn btn-primary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Забрати весь набір</a>
+      </div>
+    </section>
+
+    <!-- 6 экран -->
+    <section class="section center">
+      <div class="eyebrow">🎯 Результат</div>
+      <h2>Що зміниться</h2>
+      <div class="result-grid">
+        <div class="result-card">
+          <div class="result-icon">💵</div>
+          <div>Ти почнеш бачити свої гроші</div>
+        </div>
+        <div class="result-card">
+          <div class="result-icon">🗂️</div>
+          <div>З’явиться контроль над задачами</div>
+        </div>
+        <div class="result-card">
+          <div class="result-icon">🌿</div>
+          <div>Перестанеш жити в хаосі</div>
+        </div>
+        <div class="result-card">
+          <div class="result-icon">🧠</div>
+          <div>З’явиться відчуття ясності</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 экран -->
+    <section class="section center">
+      <div class="eyebrow">💬 Відгуки</div>
+      <h2>Що кажуть люди</h2>
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="review-icon">⭐</div>
+          <div class="review-quote">“Я вперше побачив, куди реально йдуть гроші.”</div>
+          <div class="review-name">— покупець набору</div>
+        </div>
+        <div class="review-card">
+          <div class="review-icon">⭐</div>
+          <div class="review-quote">“Почав закривати задачі, а не просто записувати їх.”</div>
+          <div class="review-name">— покупець планера</div>
+        </div>
+        <div class="review-card">
+          <div class="review-icon">⭐</div>
+          <div class="review-quote">“В голові стало тихіше, коли все зібрано в одній системі.”</div>
+          <div class="review-name">— користувач Mindseta</div>
+        </div>
+        <div class="review-card">
+          <div class="review-icon">⭐</div>
+          <div class="review-quote">“Нарешті є відчуття, що я керую своїм життям, а не навпаки.”</div>
+          <div class="review-name">— покупець набору</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 экран -->
+    <section class="section center">
+      <div class="eyebrow">❓ FAQ</div>
+      <h2>Часті запитання</h2>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <div class="faq-icon">💻</div>
+          <div class="faq-q">Чи потрібно щось встановлювати?</div>
+          <div class="faq-a">Ні, все працює в Google Sheets.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-icon">🟢</div>
+          <div class="faq-q">Чи підійде новачку?</div>
+          <div class="faq-a">Так, всередині є інструкція, і старт займає кілька хвилин.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-icon">🛠️</div>
+          <div class="faq-q">Чи можна змінювати під себе?</div>
+          <div class="faq-a">Так, ти можеш адаптувати таблиці під свій стиль і задачі.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-icon">💳</div>
+          <div class="faq-q">Це разова покупка?</div>
+          <div class="faq-a">Так, ти платиш один раз і отримуєш доступ назавжди.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 экран -->
+    <section class="section">
+      <div class="final-box">
+        <div class="eyebrow">🚀 Фінальний крок</div>
+        <h2>Це не просто таблиці</h2>
+        <p>Це система, яка дає контроль над життям, грошима, задачами та щоденною структурою.</p>
+        <a class="btn btn-secondary" href="ВАША_ССЫЛКА_НА_ОПЛАТУ">Отримати за 999 грн</a>
+        <div class="small-note">Разова покупка · Доступ одразу після оплати · Працює на телефоні і ПК</div>
+      </div>
+    </section>
+
+    <div class="footer">
+      © Mindseta
     </div>
-</div>
 
-<div class="section">
-    <h2 style="text-align:center;">Що входить</h2>
-
-    <div class="cards">
-        <div class="card">Планер життя</div>
-        <div class="card">Планер тижня</div>
-        <div class="card">Трекер звичок</div>
-        <div class="card">Бюджет</div>
-        <div class="card">Трекер задач</div>
-        <div class="card">Планер продуктивності</div>
-    </div>
-</div>
-
-<div class="section">
-    <div class="price">
-        <p class="old">1794 грн</p>
-        <p class="big">999 грн</p>
-        <p>за всі 6 планерів</p>
-        <a href="#" class="button">Купити зараз</a>
-    </div>
-</div>
-
-</div>
+  </main>
 
 </body>
 </html>
